@@ -1,4 +1,4 @@
-public class BeltViolation implements Violation {
+public class SeatBeltViolation implements Violation {
 
     @Override
     public String GetViolationStatement() {

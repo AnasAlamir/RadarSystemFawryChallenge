@@ -6,7 +6,7 @@ public class Observation{
     final int TruckViolationSpeed = 60;
     final int PrivateCarViolationSpeed = 80;
 
-    String PlateNumber;
+    String plateNumber;
     LocalDate date;
     CarType carType;
     int speed;
@@ -15,7 +15,7 @@ public class Observation{
 
 
     public Observation(String plateNumber, LocalDate date, CarType carType, int speed, SeatbeltStatus seatbeltStatus) {
-        PlateNumber = plateNumber;
+        this.plateNumber = plateNumber;
         this.date = date;
         this.carType = carType;
         this.speed = speed;
@@ -25,7 +25,7 @@ public class Observation{
 
     void observe(){
         if(this.seatbeltStatus == SeatbeltStatus.NotFastened)
-            violations.add(new BeltViolation());
+            violations.add(new SeatBeltViolation());
 
         if(this.carType == CarType.Truck){
             if(this.speed >= TruckViolationSpeed)
@@ -38,7 +38,7 @@ public class Observation{
     }
 
     void generateFine() {
-        System.out.println("Traffic fine for car " + this.PlateNumber);
+        System.out.println("Traffic fine for car " + this.plateNumber);
         int totalViolationsAmount = 0;
         for(Violation violation : violations) {
             totalViolationsAmount += violation.GetViolationFee();
