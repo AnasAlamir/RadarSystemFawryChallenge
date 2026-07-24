@@ -1,1 +1,1 @@
-enum SeatbeltStatus { Fastened, NotFastened }
+public enum SeatbeltStatus { Fastened, NotFastened }

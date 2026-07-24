@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Observation{
     final int TruckViolationSpeed = 60;
-    final int PrivateViolationSpeed = 80;
+    final int PrivateCarViolationSpeed = 80;
 
     String PlateNumber;
     LocalDate date;
@@ -31,9 +31,9 @@ public class Observation{
             if(this.speed >= TruckViolationSpeed)
                 violations.add(new TruckSpeedViolation(this.speed));
         }
-        else if (this.carType == CarType.Private) {
-            if(this.speed >= PrivateViolationSpeed)
-                violations.add(new PrivateSpeedViolation(this.speed));
+        else if (this.carType == CarType.PrivateCar) {
+            if(this.speed >= PrivateCarViolationSpeed)
+                violations.add(new PrivateCarSpeedViolation(this.speed));
         }
     }
 
@@ -46,7 +46,7 @@ public class Observation{
         System.out.println("Total amount: " + totalViolationsAmount);
 
         System.out.println("Violations:");
-        if(violations.size() > 0) {
+        if(!violations.isEmpty()) {
             for (Violation violation : violations) {
                 System.out.println("- " + violation.GetViolationStatement() + " : " + violation.GetViolationFee() + " EGP");
             }

@@ -11,7 +11,7 @@ public class Radar {
     }
     void showAllFines()
     {
-        if(observations.size() > 0) {
+        if(!observations.isEmpty()) {
             for (Observation observation : observations) {
                 observation.generateFine();
             }

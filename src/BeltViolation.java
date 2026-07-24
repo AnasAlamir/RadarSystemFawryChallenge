@@ -2,7 +2,7 @@ public class BeltViolation implements Violation {
 
     @Override
     public String GetViolationStatement() {
-        return "Seatbelt not fastned";
+        return "Seatbelt not fastened";
     }
 
     @Override

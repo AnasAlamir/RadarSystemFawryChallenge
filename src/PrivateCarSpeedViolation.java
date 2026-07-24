@@ -1,7 +1,7 @@
-public class PrivateSpeedViolation implements Violation {
+public class PrivateCarSpeedViolation implements Violation {
     int speed;
 
-    public PrivateSpeedViolation(int speed) {
+    public PrivateCarSpeedViolation(int speed) {
         this.speed = speed;
     }
     @Override
