@@ -10,17 +10,18 @@ public class Observation{
         this.violations = new ArrayList<>();
     }
 
-    List<Violation> observe(ObservationInfo observationInfo){
+    List<Violation> observe(){
 
-        if(observationInfo.seatbeltStatus == SeatbeltStatus.NotFastened)
+        if(this.observationInfo.seatbeltStatus == SeatbeltStatus.NotFastened)
             violations.add(new BeltViolation());
 
-        if(observationInfo.carType == CarType.Truck){
-            if(observationInfo.speed >= 60)
-                violations.add(new TruckSpeedViolation(observationInfo.speed));
-        } else if (observationInfo.carType == CarType.Private) {
-            if(observationInfo.speed >= 80)
-                violations.add(new PrivateSpeedViolation(observationInfo.speed));
+        if(this.observationInfo.carType == CarType.Truck){
+            if(this.observationInfo.speed >= 60)
+                violations.add(new TruckSpeedViolation(this.observationInfo.speed));
+        }
+        else if (this.observationInfo.carType == CarType.Private) {
+            if(this.observationInfo.speed >= 80)
+                violations.add(new PrivateSpeedViolation(this.observationInfo.speed));
         }
 
         return violations;

@@ -7,5 +7,6 @@ public class Main {
     public static void main(String[] args) {
         Radar myRadar = new Radar();
         myRadar.addObservation(new Observation(new ObservationInfo("ABC1234", LocalDate.now(), CarType.Private, 94, SeatbeltStatus.NotFastened)));
+        myRadar.showAllFines();
     }
 }

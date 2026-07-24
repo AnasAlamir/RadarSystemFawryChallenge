@@ -7,5 +7,13 @@ public class Radar {
     void addObservation(Observation observation)
     {
         observations.add(observation);
+        observation.observe();
+    }
+    void showAllFines()
+    {
+        for(Observation observation : observations)
+        {
+            observation.generateFine();
+        }
     }
 }
