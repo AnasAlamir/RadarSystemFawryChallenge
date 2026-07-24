@@ -1,1 +1,1 @@
-enum SeatbeltStatus { Fastened, NotFastened }// bool??
+enum SeatbeltStatus { Fastened, NotFastened }

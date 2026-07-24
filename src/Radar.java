@@ -11,9 +11,13 @@ public class Radar {
     }
     void showAllFines()
     {
-        for(Observation observation : observations)
-        {
-            observation.generateFine();
+        if(observations.size() > 0) {
+            for (Observation observation : observations) {
+                observation.generateFine();
+            }
+        }
+        else {
+            System.out.println("No Fines yet");
         }
     }
 }
