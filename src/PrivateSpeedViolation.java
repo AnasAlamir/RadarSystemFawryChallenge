@@ -5,7 +5,7 @@ public class PrivateSpeedViolation implements Violation {
         this.speed = speed;
     }
     @Override
-    public String GetViolationStatment() {
+    public String GetViolationStatement() {
         return "speed of " + speed + " exceeded max allowed 80";
     }
 

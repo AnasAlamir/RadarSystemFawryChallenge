@@ -1,4 +1,4 @@
 public interface Violation {
-    String GetViolationStatment();
+    String GetViolationStatement();
     int GetViolationFee();
 }

@@ -7,7 +7,7 @@ public class TruckSpeedViolation implements Violation {
     }
 
     @Override
-    public String GetViolationStatment() {
+    public String GetViolationStatement() {
         return "speed of " + speed + " exceeded max allowed 60";
     }
 
