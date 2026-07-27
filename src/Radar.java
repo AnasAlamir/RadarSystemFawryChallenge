@@ -5,11 +5,16 @@ import java.util.Map;
 
 public class Radar {
     List<Observation> observations = new ArrayList<>();
+    List<Violation> rules;
+
+    public Radar(List<Violation> rules) {
+        this.rules = rules;
+    }
 
     void addObservation(Observation observation)
     {
         observations.add(observation);
-        observation.observe();
+        observation.observe(this.rules);
     }
     void showAllFines()
     {

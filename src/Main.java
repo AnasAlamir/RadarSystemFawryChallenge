@@ -3,7 +3,11 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Radar myRadar = new Radar();
+        Radar myRadar = new Radar(List.of(
+                new TruckSpeedViolation(),
+                new PrivateCarSpeedViolation(),
+                new SeatBeltViolation()
+        ));
         myRadar.showAllFines();
         myRadar.addObservation(new Observation(new ObservationDetails("ABC1234", LocalDate.now(), CarType.PrivateCar, 94, SeatbeltStatus.NotFastened)));
         myRadar.addObservation(new Observation(new ObservationDetails("BBC2233", LocalDate.now(), CarType.PrivateCar, 24, SeatbeltStatus.Fastened)));
