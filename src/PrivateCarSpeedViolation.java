@@ -1,16 +1,19 @@
 public class PrivateCarSpeedViolation implements Violation {
-    int speed;
+    final int PrivateCarViolationSpeed = 80;
+    final int PrivateCarViolationFees = 300;
 
-    public PrivateCarSpeedViolation(int speed) {
-        this.speed = speed;
-    }
     @Override
-    public String GetViolationStatement() {
-        return "speed of " + speed + " exceeded max allowed 80";
+    public String getViolationStatement(ObservationDetails observationDetails) {
+        return "speed of " + observationDetails.speed + " exceeded max allowed " + PrivateCarViolationSpeed;
     }
 
     @Override
-    public int GetViolationFee() {
-        return 300;
+    public int getViolationFee() {
+        return PrivateCarViolationFees;
+    }
+
+    @Override
+    public boolean checkViolation(ObservationDetails observationDetails) {
+        return observationDetails.speed >= PrivateCarViolationSpeed && observationDetails.carType == CarType.PrivateCar;
     }
 }

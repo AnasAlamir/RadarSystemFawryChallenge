@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Radar {
     List<Observation> observations = new ArrayList<>();
@@ -28,30 +30,22 @@ public class Radar {
             for (Observation observation : observations) {
                 int totalViolationsAmount = 0;
                 for(Violation violation : observation.violations) {
-                    totalViolationsAmount += violation.GetViolationFee();
+                    totalViolationsAmount += violation.getViolationFee();
                 }
-                getFineDtos.add(new GetFineDto(observation.plateNumber, totalViolationsAmount));
+                getFineDtos.add(new GetFineDto(observation.observationDetails.plateNumber, totalViolationsAmount));
             }
         }
         return getFineDtos;
     }
 
-    ViolatedRulesCounts getAllViolationsCounts()
+    Map<String, Integer> getAllViolationsCounts()
     {
-        int privateCarSpeedViolationCount = 0;
-        int truckSpeedViolationCount = 0;
-        int seatBeltViolationCount = 0;
+        Map<String, Integer> counts = new HashMap<>();
         for (Observation observation : observations) {
-            for(Violation violation : observation.violations) {
-                if(violation instanceof PrivateCarSpeedViolation)
-                    privateCarSpeedViolationCount++;
-                else if(violation instanceof TruckSpeedViolation)
-                    truckSpeedViolationCount++;
-                else if(violation instanceof SeatBeltViolation)
-                    seatBeltViolationCount++;
-            }
+            for(Violation violation : observation.violations)
+                counts.put(violation.getRuleName(),counts.getOrDefault(violation.getRuleName(), 0) + 1);
         }
-        return new ViolatedRulesCounts(privateCarSpeedViolationCount, truckSpeedViolationCount, seatBeltViolationCount);
+        return counts;
     }
 }
 

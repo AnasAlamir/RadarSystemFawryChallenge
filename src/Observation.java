@@ -3,52 +3,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Observation{
-    final int TruckViolationSpeed = 60;
-    final int PrivateCarViolationSpeed = 80;
 
-    String plateNumber;
-    LocalDate date;
-    CarType carType;
-    int speed;
-    SeatbeltStatus seatbeltStatus;
+    ObservationDetails observationDetails;
     List<Violation> violations;
 
+    List<Violation> possibleViolations;
 
-    public Observation(String plateNumber, LocalDate date, CarType carType, int speed, SeatbeltStatus seatbeltStatus) {
-        this.plateNumber = plateNumber;
-        this.date = date;
-        this.carType = carType;
-        this.speed = speed;
-        this.seatbeltStatus = seatbeltStatus;
+    public Observation(ObservationDetails observationDetails) {
+        this.observationDetails = observationDetails;
         this.violations = new ArrayList<>();
+
+        this.possibleViolations = new ArrayList<>();
+        possibleViolations.add(new TruckSpeedViolation());
+        possibleViolations.add(new PrivateCarSpeedViolation());
+        possibleViolations.add(new SeatBeltViolation());
+
     }
 
     void observe(){
-        if(this.seatbeltStatus == SeatbeltStatus.NotFastened)
-            violations.add(new SeatBeltViolation());
-
-        if(this.carType == CarType.Truck){
-            if(this.speed >= TruckViolationSpeed)
-                violations.add(new TruckSpeedViolation(this.speed));
-        }
-        else if (this.carType == CarType.PrivateCar) {
-            if(this.speed >= PrivateCarViolationSpeed)
-                violations.add(new PrivateCarSpeedViolation(this.speed));
+        for (Violation violation : possibleViolations) {
+            if (violation.checkViolation(observationDetails))
+                violations.add(violation);
         }
     }
 
     void generateFine() {
-        System.out.println("Traffic fine for car " + this.plateNumber);
+        System.out.println("Traffic fine for car " + observationDetails.plateNumber);
         int totalViolationsAmount = 0;
         for(Violation violation : violations) {
-            totalViolationsAmount += violation.GetViolationFee();
+            totalViolationsAmount += violation.getViolationFee();
         }
         System.out.println("Total amount: " + totalViolationsAmount);
 
         System.out.println("Violations:");
         if(!violations.isEmpty()) {
             for (Violation violation : violations) {
-                System.out.println("- " + violation.GetViolationStatement() + " : " + violation.GetViolationFee() + " EGP");
+                System.out.println("- " + violation.getViolationStatement(observationDetails) + " : " + violation.getViolationFee() + " EGP");
             }
         }
         else {

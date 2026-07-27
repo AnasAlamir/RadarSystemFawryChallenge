@@ -1,18 +1,19 @@
 public class TruckSpeedViolation implements Violation {
+    final int TruckViolationSpeed = 60;
+    final int TruckViolationFees = 500;
 
-    int speed;
-
-    public TruckSpeedViolation(int speed) {
-        this.speed = speed;
+    @Override
+    public String getViolationStatement(ObservationDetails observationDetails) {
+        return "speed of " + observationDetails.speed + " exceeded max allowed " + TruckViolationSpeed;
     }
 
     @Override
-    public String GetViolationStatement() {
-        return "speed of " + speed + " exceeded max allowed 60";
+    public int getViolationFee() {
+        return TruckViolationFees;
     }
 
     @Override
-    public int GetViolationFee() {
-        return 500;
+    public boolean checkViolation(ObservationDetails observationDetails) {
+        return observationDetails.speed >= TruckViolationSpeed && observationDetails.carType == CarType.Truck;
     }
 }
