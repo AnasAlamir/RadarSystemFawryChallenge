@@ -8,12 +8,12 @@ public class Main {
                 new PrivateCarSpeedRule(),
                 new SeatBeltRule()
         ));
-        myRadar.showAllFines();
-        myRadar.addObservation(new Observation(new ObservationDetails("ABC1234", LocalDate.now(), CarType.PrivateCar, 94, SeatbeltStatus.NotFastened)));
-        myRadar.addObservation(new Observation(new ObservationDetails("BBC2233", LocalDate.now(), CarType.PrivateCar, 24, SeatbeltStatus.Fastened)));
-        myRadar.addObservation(new Observation(new ObservationDetails("CCC3344", LocalDate.now(), CarType.Truck, 65, SeatbeltStatus.Fastened)));
-        myRadar.addObservation(new Observation(new ObservationDetails("DEF4455", LocalDate.now(), CarType.Truck, 30, SeatbeltStatus.NotFastened)));
-        myRadar.showAllFines();
+        myRadar.displayAllFines();
+        myRadar.processObservation(new Observation("ABC1234", LocalDate.now(), CarType.PrivateCar, 94, SeatbeltStatus.NotFastened));
+        myRadar.processObservation(new Observation("BBC2233", LocalDate.now(), CarType.PrivateCar, 24, SeatbeltStatus.Fastened));
+        myRadar.processObservation(new Observation("CCC3344", LocalDate.now(), CarType.Truck, 65, SeatbeltStatus.Fastened));
+        myRadar.processObservation(new Observation("DEF4455", LocalDate.now(), CarType.Truck, 30, SeatbeltStatus.NotFastened));
+        myRadar.displayAllFines();
 
         System.out.println("==========================");
         System.out.println("getAllFines");

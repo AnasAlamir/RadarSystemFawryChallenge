@@ -4,34 +4,35 @@ import java.util.List;
 import java.util.Map;
 
 public class Radar {
-    List<Observation> observations;
     List<Rule> predefinedRules;
+    List<Fine> fines;
 
     public Radar(List<Rule> predefinedRules) {
-        observations = new ArrayList<>();
         this.predefinedRules = predefinedRules;
-
+        fines = new ArrayList<>();
     }
 
-    void addObservation(Observation observation)
+    void processObservation(Observation observation)
     {
-        observations.add(observation);
-
-        checkObservationAgainstRules(observation);// and add??
+        List<Violation> violations = getPossibleViolations(observation);
+        if(!violations.isEmpty())
+            fines.add(new Fine(violations, observation));
     }
 
-    private void checkObservationAgainstRules(Observation observation) {
+    private List<Violation> getPossibleViolations(Observation observation) {
+        List<Violation> violations = new ArrayList<>();
         for (Rule rule : predefinedRules) {
-            if (rule.checkRuleViolation(observation.observationDetails))
-                observation.CreateViolation(rule);
+            if (rule.checkRuleViolation(observation))
+                violations.add(new Violation(rule));
         }
+        return violations;
     }
 
-    void showAllFines()
+    void displayAllFines()
     {
-        if(!observations.isEmpty()) {
-            for (Observation observation : observations) {
-                Fine.generateFine(observation);
+        if(!fines.isEmpty()) {
+            for (Fine fine : fines) {
+                fine.generateFine();
             }
         }
         else {
@@ -42,9 +43,9 @@ public class Radar {
     List<GetFineDto> getAllFines()
     {
         List<GetFineDto> finesDtos = new ArrayList<>();
-        if(!observations.isEmpty()) {
-            for (Observation observation : observations) {
-                finesDtos.add(Fine.get(observation));
+        if(!fines.isEmpty()) {
+            for (Fine fine : fines) {
+                finesDtos.add(fine.get());
             }
         }
         return finesDtos;
@@ -53,11 +54,10 @@ public class Radar {
     Map<String, Integer> getAllViolationsCounts()
     {
         Map<String, Integer> counts = new HashMap<>();
-        for (Observation observation : observations) {
-            for(Violation violation : observation.violations)
+        for (Fine fine : fines) {
+            for(Violation violation : fine.violations)
                 counts.put(violation.ruleViolated.getRuleName(),counts.getOrDefault(violation.ruleViolated.getRuleName(), 0) + 1);
         }
         return counts;
     }
 }
-

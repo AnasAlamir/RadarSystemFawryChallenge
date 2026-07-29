@@ -1,6 +1,6 @@
 public interface Rule {
-    String getViolationStatement(ObservationDetails observationDetails);
+    String getViolationStatement(Observation observation);
     int getViolationFee();
-    boolean checkRuleViolation(ObservationDetails observationDetails);
+    boolean checkRuleViolation(Observation observation);
     String getRuleName();
 }

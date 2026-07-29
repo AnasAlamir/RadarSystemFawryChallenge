@@ -2,7 +2,7 @@ public class SeatBeltRule implements Rule {
     private final int SeatBeltViolationFees = 100;
 
     @Override
-    public String getViolationStatement(ObservationDetails observationDetails) {
+    public String getViolationStatement(Observation observation) {
         return "Seatbelt not fastened";
     }
 
@@ -12,8 +12,8 @@ public class SeatBeltRule implements Rule {
     }
 
     @Override
-    public boolean checkRuleViolation(ObservationDetails observationDetails) {
-        return observationDetails.seatbeltStatus == SeatbeltStatus.NotFastened;
+    public boolean checkRuleViolation(Observation observation) {
+        return observation.seatbeltStatus == SeatbeltStatus.NotFastened;
     }
 
     @Override

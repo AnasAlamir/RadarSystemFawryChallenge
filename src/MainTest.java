@@ -24,10 +24,6 @@ public class MainTest {
                     Violations:
                     - speed of 94 exceeded max allowed 80 : 300 EGP
                     - Seatbelt not fastened : 100 EGP
-                    Traffic fine for car BBC2233
-                    Total amount: 0
-                    Violations:
-                    There are no violations
                     Traffic fine for car CCC3344
                     Total amount: 500
                     Violations:
@@ -39,7 +35,6 @@ public class MainTest {
                     ==========================
                     getAllFines
                     GetFineDto{plateNumber='ABC1234', totalViolationsAmount=400}
-                    GetFineDto{plateNumber='BBC2233', totalViolationsAmount=0}
                     GetFineDto{plateNumber='CCC3344', totalViolationsAmount=500}
                     GetFineDto{plateNumber='DEF4455', totalViolationsAmount=100}
                     ==========================

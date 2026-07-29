@@ -1,26 +1,29 @@
 import java.util.List;
 
 public class Fine {
+    List<Violation> violations;
+    Observation observation;
 
-    static void generateFine(Observation observation) {
-        System.out.println("Traffic fine for car " + observation.observationDetails.plateNumber);
-        System.out.println("Total amount: " + getTotalViolationsAmount(observation.violations));
+    public Fine(List<Violation> violations, Observation observation) {
+        this.violations = violations;
+        this.observation = observation;
+    }
+
+    public void generateFine() {
+        System.out.println("Traffic fine for car " + observation.plateNumber);
+        System.out.println("Total amount: " + getTotalViolationsAmount(violations));
         System.out.println("Violations:");
-        if(!observation.violations.isEmpty()) {
-            for (Violation violation : observation.violations) {
-                System.out.println(violation.getViolationDetails(observation.observationDetails));
-            }
+        for (Violation violation : violations) {
+            System.out.println(violation.getViolationDetails(observation));
         }
-        else {
-            System.out.println("There are no violations");
-        }
+
     }
 
-    static GetFineDto get(Observation observation){
-        return new GetFineDto(observation.observationDetails.plateNumber, Fine.getTotalViolationsAmount(observation.violations));
+    GetFineDto get(){
+        return new GetFineDto(observation.plateNumber, getTotalViolationsAmount(violations));
     }
 
-    static public int getTotalViolationsAmount(List<Violation> violations) {
+    public int getTotalViolationsAmount(List<Violation> violations) {
         int totalViolationsAmount = 0;
         for(Violation violation : violations) {
             totalViolationsAmount += violation.ruleViolated.getViolationFee();

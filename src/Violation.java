@@ -5,7 +5,7 @@ public class Violation {
         this.ruleViolated = ruleViolated;
     }
 
-    public String getViolationDetails(ObservationDetails observationDetails){
-        return "- " + ruleViolated.getViolationStatement(observationDetails) + " : " + ruleViolated.getViolationFee() + " EGP";
+    public String getViolationDetails(Observation observation){
+        return "- " + ruleViolated.getViolationStatement(observation) + " : " + ruleViolated.getViolationFee() + " EGP";
     }
 }

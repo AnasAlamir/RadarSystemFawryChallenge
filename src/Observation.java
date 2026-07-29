@@ -1,17 +1,17 @@
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Observation{
-    ObservationDetails observationDetails;
-    List<Violation> violations;
+    String plateNumber;
+    LocalDate date;
+    CarType carType;
+    int speed;
+    SeatbeltStatus seatbeltStatus;
 
-    public Observation(ObservationDetails observationDetails) {
-        this.observationDetails = observationDetails;
-        this.violations = new ArrayList<>();
-    }
-    public void CreateViolation(Rule rule)
-    {
-        violations.add(new Violation(rule));
+    public Observation(String plateNumber, LocalDate date, CarType carType, int speed, SeatbeltStatus seatbeltStatus) {
+        this.plateNumber = plateNumber;
+        this.date = date;
+        this.carType = carType;
+        this.speed = speed;
+        this.seatbeltStatus = seatbeltStatus;
     }
 }

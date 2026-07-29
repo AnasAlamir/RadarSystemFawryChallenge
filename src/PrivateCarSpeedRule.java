@@ -3,8 +3,8 @@ public class PrivateCarSpeedRule implements Rule {
     private final int PrivateCarViolationFees = 300;
 
     @Override
-    public String getViolationStatement(ObservationDetails observationDetails) {
-        return "speed of " + observationDetails.speed + " exceeded max allowed " + PrivateCarViolationSpeed;
+    public String getViolationStatement(Observation observation) {
+        return "speed of " + observation.speed + " exceeded max allowed " + PrivateCarViolationSpeed;
     }
 
     @Override
@@ -13,8 +13,8 @@ public class PrivateCarSpeedRule implements Rule {
     }
 
     @Override
-    public boolean checkRuleViolation(ObservationDetails observationDetails) {
-        return observationDetails.speed >= PrivateCarViolationSpeed && observationDetails.carType == CarType.PrivateCar;
+    public boolean checkRuleViolation(Observation observation) {
+        return observation.speed > PrivateCarViolationSpeed && observation.carType == CarType.PrivateCar;
     }
 
     @Override
