@@ -44,7 +44,7 @@ public class MainTest {
                     GetFineDto{plateNumber='DEF4455', totalViolationsAmount=100}
                     ==========================
                     getAllViolationsCounts
-                    {SeatBeltViolation=2, PrivateCarSpeedViolation=1, TruckSpeedViolation=1}
+                    {Truck Speed=1, Seat Belt=2, Private Car Speed=1}
                     """;
 
             // Normalize line endings (\r\n vs \n)

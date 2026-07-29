@@ -1,8 +1,11 @@
-public interface Violation {
-    String getViolationStatement(ObservationDetails observationDetails);
-    int getViolationFee();
-    boolean checkViolation(ObservationDetails observationDetails);
-    default String getRuleName(){
-        return this.getClass().getSimpleName();
+public class Violation {
+    Rule ruleViolated;
+
+    public Violation(Rule ruleViolated) {
+        this.ruleViolated = ruleViolated;
+    }
+
+    public String getViolationDetails(ObservationDetails observationDetails){
+        return "- " + ruleViolated.getViolationStatement(observationDetails) + " : " + ruleViolated.getViolationFee() + " EGP";
     }
 }

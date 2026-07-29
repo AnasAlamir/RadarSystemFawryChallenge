@@ -4,23 +4,34 @@ import java.util.List;
 import java.util.Map;
 
 public class Radar {
-    List<Observation> observations = new ArrayList<>();
-    List<Violation> rules;
+    List<Observation> observations;
+    List<Rule> predefinedRules;
 
-    public Radar(List<Violation> rules) {
-        this.rules = rules;
+    public Radar(List<Rule> predefinedRules) {
+        observations = new ArrayList<>();
+        this.predefinedRules = predefinedRules;
+
     }
 
     void addObservation(Observation observation)
     {
         observations.add(observation);
-        observation.observe(this.rules);
+
+        checkObservationAgainstRules(observation);// and add??
     }
+
+    private void checkObservationAgainstRules(Observation observation) {
+        for (Rule rule : predefinedRules) {
+            if (rule.checkRuleViolation(observation.observationDetails))
+                observation.CreateViolation(rule);
+        }
+    }
+
     void showAllFines()
     {
         if(!observations.isEmpty()) {
             for (Observation observation : observations) {
-                observation.generateFine();
+                Fine.generateFine(observation);
             }
         }
         else {
@@ -30,17 +41,13 @@ public class Radar {
 
     List<GetFineDto> getAllFines()
     {
-        List<GetFineDto> getFineDtos = new ArrayList<>();
+        List<GetFineDto> finesDtos = new ArrayList<>();
         if(!observations.isEmpty()) {
             for (Observation observation : observations) {
-                int totalViolationsAmount = 0;
-                for(Violation violation : observation.violations) {
-                    totalViolationsAmount += violation.getViolationFee();
-                }
-                getFineDtos.add(new GetFineDto(observation.observationDetails.plateNumber, totalViolationsAmount));
+                finesDtos.add(Fine.get(observation));
             }
         }
-        return getFineDtos;
+        return finesDtos;
     }
 
     Map<String, Integer> getAllViolationsCounts()
@@ -48,7 +55,7 @@ public class Radar {
         Map<String, Integer> counts = new HashMap<>();
         for (Observation observation : observations) {
             for(Violation violation : observation.violations)
-                counts.put(violation.getRuleName(),counts.getOrDefault(violation.getRuleName(), 0) + 1);
+                counts.put(violation.ruleViolated.getRuleName(),counts.getOrDefault(violation.ruleViolated.getRuleName(), 0) + 1);
         }
         return counts;
     }

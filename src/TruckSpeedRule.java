@@ -1,5 +1,5 @@
-public class TruckSpeedViolation implements Violation {
-    final int TruckViolationSpeed = 60;
+public class TruckSpeedRule implements Rule {
+    private final int TruckViolationSpeed = 60;
     final int TruckViolationFees = 500;
 
     @Override
@@ -13,7 +13,12 @@ public class TruckSpeedViolation implements Violation {
     }
 
     @Override
-    public boolean checkViolation(ObservationDetails observationDetails) {
+    public boolean checkRuleViolation(ObservationDetails observationDetails) {
         return observationDetails.speed >= TruckViolationSpeed && observationDetails.carType == CarType.Truck;
+    }
+
+    @Override
+    public String getRuleName() {
+        return "Truck Speed";
     }
 }
